@@ -1,0 +1,59 @@
+/*  HINT
+
+2 case you need to understand.
+
+1-> where both latters are same in word.
+    1) for example both latters are same but this word are only 1 frequency.
+        here unpair variable count that type on word we can use only one that type of word in middle of string so ans+=2.
+    2) for example both latters are same but frequency is more than 1 so ans+=4.    
+2-> where both latters are not sasme in word.
+    1) reverse of word is present so ans+=4.
+
+*/
+// SOLUTION 
+
+class Solution {
+public:
+    int longestPalindrome(vector<string>& words) {
+       unordered_map<string,int> um;
+        int ans = 0,unpair = 0;
+        for(auto w: words)
+        {
+            // Where both letters are same
+            if(w[0]==w[1])
+            {
+                if(um[w]>0)
+                {
+                    um[w]--;
+                    unpair--;
+                    ans+=4;
+                }
+                else
+                {
+                    unpair++;
+                    um[w]++;
+                }
+            }
+            //Where both letters are different
+            else
+            {
+                string rev = w;
+                reverse(rev.begin(),rev.end());
+                if(um[rev]>0)
+                {
+                    um[rev]--;
+                    ans+=4;
+                }
+                else
+                {
+                    um[w]++;
+                }
+            }
+        }
+        if(unpair>0)
+        {
+            ans+=2;
+        }
+        return ans;
+    }
+};

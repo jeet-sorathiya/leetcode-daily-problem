@@ -1,0 +1,43 @@
+HINT :
+
+* Make Two pointer l(start at 0th index) and r(start at last index).
+* both pointed to vowel so just swap them and go to next(l++ , r--).
+* if only one pointed to vowel so hold it until next pointer not found vowel.
+
+SOLUTION :
+
+class Solution {
+public:
+    bool isVowel(char c)
+    {
+        if(c == 'a' || c == 'e' || c == 'i' || c== 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    string reverseVowels(string s) {
+        int l = 0;
+        int r = s.length() - 1;
+        while(l<r)
+        {
+            if(isVowel(s[l]) && isVowel(s[r]))
+            {
+                swap(s[l++],s[r--]);
+            }
+            else if(isVowel(s[l]))
+            {
+                r--;
+            }
+            else
+            {
+                l++;
+            }
+        }
+        
+        return s;
+    }
+};

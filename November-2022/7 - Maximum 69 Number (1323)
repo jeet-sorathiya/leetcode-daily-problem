@@ -1,0 +1,23 @@
+Hint :
+
+* just replace 1st '6' with '9' in number.
+* if all are '9' so just return number as it.
+
+Solution :
+
+class Solution {
+public:
+    int maximum69Number (int num) {
+        string s = to_string(num);
+        for(int i = 0 ; i < s.length() ; i++)
+        {
+            if(s[i] == '6')
+            {
+                s[i] = '9';
+                return stoi(s);
+            }
+        }
+        return num;
+       
+    }
+};

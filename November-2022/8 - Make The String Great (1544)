@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string makeGood(string s) {
+        
+        stack <char> myStack;
+        string res = "";
+        myStack.push(s[s.length() -1]);
+		
+        for (int i = s.length() - 2; i >= 0; i--){
+            if(myStack.size() == 0 || myStack.top() == s[i]){
+                myStack.push(s[i]);
+                continue;
+            }
+            
+            if(toupper(s[i]) == myStack.top() || toupper(myStack.top()) == s[i]){
+                
+                myStack.pop();
+                
+            }
+            else{
+                
+                myStack.push(s[i]);
+            }
+        }
+        
+        while(myStack.size() != 0){
+            
+            res += myStack.top();;
+            myStack.pop();
+        }
+        return res;
+    }
+};

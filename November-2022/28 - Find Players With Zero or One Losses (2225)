@@ -1,0 +1,36 @@
+ vector<vector<int>>ans;
+        unordered_map<int,int>lost;  //player-->lost count
+        //fill the map 
+        for(auto &x : matches){
+            lost[x[1]]++;
+        }
+        //now our map have players with their lose count
+        vector<int>unlucky;//who lose exactly one match
+        vector<int>winner;//who won every matches
+        
+        //fill the winner
+        //traverse in array and check that player lose any match using map
+        for(auto &x :matches){
+            if(lost.find(x[0])==lost.end()){
+                winner.push_back(x[0]);
+                lost[x[0]]=2;//so that winner doesn't include more than one time 
+            }
+        }
+        
+        //fill the unlucky 
+        for(auto &x : lost){
+            if(x.second==1){
+                unlucky.push_back(x.first);
+            }
+        }
+        
+        //sort both 
+        sort(winner.begin(),winner.end());
+        sort(unlucky.begin(),unlucky.end());
+        
+        //push in ans 
+        ans.push_back(winner);
+        ans.push_back(unlucky);
+        
+        //return ans 
+        return ans;

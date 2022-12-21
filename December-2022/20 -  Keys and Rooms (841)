@@ -1,0 +1,23 @@
+class Solution 
+{
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) 
+    {
+        deque<int> q({0});
+        unordered_set<int> visited;
+        while (!q.empty())
+        {
+            int r = q.front(); q.pop_front();
+            visited.insert(r);
+            for (int k : rooms[r])
+            {
+                if (!visited.count(k))
+                {
+                    q.push_back(k);
+                }
+            }             
+                   
+        }        
+        return visited.size() == rooms.size();
+    }
+};

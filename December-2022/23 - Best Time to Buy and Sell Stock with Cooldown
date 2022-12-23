@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& p) {
+        int n=p.size();
+      vector<int>before1(2,0);
+      vector<int>before2(2,0);
+      vector<int>curr(2,0);
+       
+        for(int ind=n-1;ind>=0;ind--){
+          for(int buy=0;buy<2;buy++){
+            if(buy) curr[buy]=max(-p[ind]+before1[0],before1[1]);
+             else curr[buy]=max(p[ind]+before2[1],before1[0]);
+        }
+       before2=before1;
+       before1=curr;
+        }
+       return curr[1];  
+    }
+};

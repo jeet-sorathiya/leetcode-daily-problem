@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int dfs(vector<vector<int>>& grid , vector<vector<int>> vis, int i , int j)
+    {
+        //check for the bounded region
+        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j] == -1 || vis[i][j])
+        return 0;
+
+        //If we reached the destination just check if all the movable nodes visited or not 
+        //If yes then we'll return 1
+        if(grid[i][j] == 2)
+        {
+            vis[i][j] = 1;
+            for(int i=0; i<grid.size() ;i++)
+            {
+                for(int j=0; j<grid[0].size();j++)
+                {
+                    if(vis[i][j] == 0 && grid[i][j]!=-1)
+                        return 0;
+                }
+            }
+            return 1;
+        }
+        vis[i][j] = 1;
+
+        //apply dfs for all the adj neighbours
+        return dfs(grid , vis , i+1 , j) + dfs(grid , vis , i-1, j) + dfs(grid , vis , i , j+1) + dfs(grid , vis , i , j-1);
+
+
+    }
+    int uniquePathsIII(vector<vector<int>>& grid) {
+        vector<vector<int>> vis = grid;
+         for(int i=0; i<grid.size() ;i++)
+        {
+            for(int j=0; j<grid[0].size() ;j++)
+            vis[i][j] = 0;
+        }
+        for(int i=0; i<grid.size() ;i++)
+        {
+            for(int j=0; j<grid[0].size() ;j++)
+            {
+                if(grid[i][j] == 1)
+                    return dfs(grid , vis , i , j);
+
+            }
+        }
+        return 0;
+    }
+};

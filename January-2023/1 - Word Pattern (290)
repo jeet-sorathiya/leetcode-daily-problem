@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        vector<string>v;
+        for(int i = 0 ; i < s.size() ; i++)
+        {
+
+          string ans = "";
+            while(i < s.size() && s[i] != 32)
+            {
+                 ans += s[i];
+                 i++;
+            }
+            v.push_back(ans);
+        }
+          if(v.size() != pattern.size()) return false;
+          unordered_map<char,string>mapping;
+          unordered_map<string,bool>map2;
+
+          for(int i = 0 ; i < pattern.size() ; i++)
+          {
+              if((mapping[pattern[i]].size() != 0 && mapping[pattern[i]] != v[i]) || (map2[v[i]] == true && mapping[pattern[i]].size() == 0) ) return false;
+              else 
+              {
+                
+              mapping[pattern[i]] = v[i];
+              map2[v[i]] = true;
+              }
+          }
+          return true;
+    }
+};

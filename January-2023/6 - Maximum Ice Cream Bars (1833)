@@ -1,0 +1,28 @@
+Intuition
+Sorting the array.
+
+Approach
+sorted the array to give us the smallest elements.Max amount of icecream that can be purchased would be when we subtract the cost of each icecream from total coins until the cost of icecream is more then the coins we have.
+
+Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+Code
+class Solution {
+public:
+    int maxIceCream(vector<int>& costs, int coins) {
+        sort(costs.begin(),costs.end());
+        int ans=0;
+        for(int i=0;i<costs.size();i++){
+            if(coins>=costs[i]){
+                coins-=costs[i];
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
